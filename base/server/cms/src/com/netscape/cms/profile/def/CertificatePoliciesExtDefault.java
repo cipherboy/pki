@@ -33,6 +33,7 @@ import org.mozilla.jss.netscape.security.x509.DisplayText;
 import org.mozilla.jss.netscape.security.x509.NoticeReference;
 import org.mozilla.jss.netscape.security.x509.PKIXExtensions;
 import org.mozilla.jss.netscape.security.x509.PolicyQualifiers;
+import org.mozilla.jss.netscape.security.x509.PolicyQualifierInfo;
 import org.mozilla.jss.netscape.security.x509.Qualifier;
 import org.mozilla.jss.netscape.security.x509.UserNotice;
 import org.mozilla.jss.netscape.security.x509.X509CertInfo;
@@ -496,11 +497,11 @@ public class CertificatePoliciesExtDefault extends EnrollExtDefault {
                     StringBuffer noticeNum = new StringBuffer();
                     String explicitText = "";
 
-                    if (oid.toString().equals(org.mozilla.jss.netscape.security.x509.PolicyQualifierInfo.QT_CPS.toString())) {
+                    if (oid.toString().equals(PolicyQualifierInfo.QT_CPS.toString())) {
                         cpsuriEnable = "true";
                         CPSuri content = (CPSuri) qualifier;
                         cpsuri = content.getURI();
-                    } else if (oid.toString().equals(org.mozilla.jss.netscape.security.x509.PolicyQualifierInfo.QT_UNOTICE.toString())) {
+                    } else if (oid.toString().equals(PolicyQualifierInfo.QT_UNOTICE.toString())) {
                         usernoticeEnable = "true";
                         UserNotice content = (UserNotice) qualifier;
                         NoticeReference ref = content.getNoticeReference();
