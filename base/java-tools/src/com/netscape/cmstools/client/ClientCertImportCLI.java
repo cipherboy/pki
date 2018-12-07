@@ -47,8 +47,8 @@ import com.netscape.cmsutil.crypto.CryptoUtil;
 import com.netscape.cmsutil.util.Cert;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.pkcs.PKCS12;
-import netscape.security.pkcs.PKCS7;
+import org.mozilla.jss.netscape.security.pkcs.PKCS12;
+import org.mozilla.jss.netscape.security.pkcs.PKCS7;
 
 /**
  * @author Endi S. Dewata

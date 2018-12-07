@@ -49,7 +49,7 @@ import com.netscape.cmscore.cert.CrlCachePrettyPrint;
 import com.netscape.cmscore.cert.CrlPrettyPrint;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X509CRLImpl;
+import org.mozilla.jss.netscape.security.x509.X509CRLImpl;
 
 /**
  * Retrieve CRL for a Certificate Authority

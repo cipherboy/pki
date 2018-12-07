@@ -62,10 +62,10 @@ import com.netscape.certsrv.tps.token.TokenStatus;
 import com.netscape.cmscore.security.JssSubsystem;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.provider.RSAPublicKey;
-import netscape.security.util.BigInt;
-import netscape.security.x509.RevocationReason;
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.provider.RSAPublicKey;
+import org.mozilla.jss.netscape.security.util.BigInt;
+import org.mozilla.jss.netscape.security.x509.RevocationReason;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 import sun.security.pkcs11.wrapper.PKCS11Constants;
 
 public class TPSEnrollProcessor extends TPSProcessor {

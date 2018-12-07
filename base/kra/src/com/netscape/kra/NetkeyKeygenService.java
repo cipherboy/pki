@@ -68,8 +68,8 @@ import com.netscape.cmscore.security.JssSubsystem;
 import com.netscape.cmsutil.crypto.CryptoUtil;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.provider.RSAPublicKey;
-import netscape.security.util.WrappingParams;
+import org.mozilla.jss.netscape.security.provider.RSAPublicKey;
+import org.mozilla.jss.netscape.security.util.WrappingParams;
 
 /**
  * A class representing keygen/archival request procesor for requests

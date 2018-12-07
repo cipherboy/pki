@@ -41,7 +41,7 @@ import com.netscape.certsrv.base.PKIException;
 import com.netscape.certsrv.util.CryptoProvider;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.pkcs.PKCS7;
+import org.mozilla.jss.netscape.security.pkcs.PKCS7;
 
 
 public class PKIClient {

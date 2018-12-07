@@ -53,8 +53,8 @@ import netscape.ldap.LDAPConnection;
 import netscape.ldap.LDAPEntry;
 import netscape.ldap.LDAPSearchResults;
 import netscape.ldap.LDAPv2;
-import netscape.security.util.DerInputStream;
-import netscape.security.util.DerValue;
+import org.mozilla.jss.netscape.security.util.DerInputStream;
+import org.mozilla.jss.netscape.security.util.DerValue;
 
 /**
  * SharedSecret provides methods to retrieve shared secrets between users and

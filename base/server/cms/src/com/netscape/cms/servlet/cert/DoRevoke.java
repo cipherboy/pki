@@ -69,8 +69,8 @@ import com.netscape.cms.servlet.common.CMSTemplateParams;
 import com.netscape.cms.servlet.common.ECMSGWException;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.RevocationReason;
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.RevocationReason;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * Revoke a Certificate

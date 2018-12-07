@@ -24,7 +24,7 @@ import com.netscape.certsrv.logging.SignedAuditEvent;
 import com.netscape.certsrv.request.IRequest;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 public class CertRequestProcessedEvent extends SignedAuditEvent {
 

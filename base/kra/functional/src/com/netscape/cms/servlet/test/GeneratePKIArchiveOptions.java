@@ -34,7 +34,7 @@ import org.mozilla.jss.util.Password;
 import com.netscape.cmsutil.crypto.CryptoUtil;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.util.WrappingParams;
+import org.mozilla.jss.netscape.security.util.WrappingParams;
 
 public class GeneratePKIArchiveOptions {
 

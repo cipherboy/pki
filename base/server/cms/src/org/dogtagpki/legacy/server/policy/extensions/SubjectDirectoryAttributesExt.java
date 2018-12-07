@@ -35,15 +35,15 @@ import com.netscape.certsrv.logging.ILogger;
 import com.netscape.certsrv.request.IRequest;
 import com.netscape.certsrv.request.PolicyResult;
 
-import netscape.security.util.DerValue;
-import netscape.security.util.ObjectIdentifier;
-import netscape.security.x509.AVAValueConverter;
-import netscape.security.x509.Attribute;
-import netscape.security.x509.CertificateExtensions;
-import netscape.security.x509.CertificateVersion;
-import netscape.security.x509.SubjectDirAttributesExtension;
-import netscape.security.x509.X500NameAttrMap;
-import netscape.security.x509.X509CertInfo;
+import org.mozilla.jss.netscape.security.util.DerValue;
+import org.mozilla.jss.netscape.security.util.ObjectIdentifier;
+import org.mozilla.jss.netscape.security.x509.AVAValueConverter;
+import org.mozilla.jss.netscape.security.x509.Attribute;
+import org.mozilla.jss.netscape.security.x509.CertificateExtensions;
+import org.mozilla.jss.netscape.security.x509.CertificateVersion;
+import org.mozilla.jss.netscape.security.x509.SubjectDirAttributesExtension;
+import org.mozilla.jss.netscape.security.x509.X500NameAttrMap;
+import org.mozilla.jss.netscape.security.x509.X509CertInfo;
 
 /**
  * Policy to add the subject directory attributes extension.

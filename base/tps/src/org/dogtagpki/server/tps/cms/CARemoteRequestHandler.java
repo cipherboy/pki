@@ -42,8 +42,8 @@ import com.netscape.cmsutil.http.HttpResponse;
 import com.netscape.cmsutil.util.Utils;
 import com.netscape.cmsutil.xml.XMLObject;
 
-import netscape.security.x509.RevocationReason;
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.RevocationReason;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * CARemoteRequestHandler is a class representing remote requests

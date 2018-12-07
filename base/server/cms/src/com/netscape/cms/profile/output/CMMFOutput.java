@@ -42,8 +42,8 @@ import com.netscape.cms.profile.common.EnrollProfile;
 import com.netscape.cmscore.cert.CertPrettyPrint;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.CertificateChain;
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.CertificateChain;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * This class implements the output plugin that outputs

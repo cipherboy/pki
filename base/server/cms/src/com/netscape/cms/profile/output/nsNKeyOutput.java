@@ -19,7 +19,7 @@ package com.netscape.cms.profile.output;
 
 import java.util.Locale;
 
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 import com.netscape.certsrv.apps.CMS;
 import com.netscape.certsrv.base.IConfigStore;

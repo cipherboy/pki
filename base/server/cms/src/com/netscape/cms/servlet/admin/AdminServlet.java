@@ -63,7 +63,7 @@ import com.netscape.cms.servlet.base.UserInfo;
 import com.netscape.cmscore.logging.Auditor;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * A class represents an administration servlet that

@@ -58,7 +58,7 @@ import com.netscape.cmsutil.util.Cert;
 
 import netscape.ldap.util.DN;
 import netscape.ldap.util.RDN;
-import netscape.security.x509.X500Name;
+import org.mozilla.jss.netscape.security.x509.X500Name;
 
 /**
  * @author Endi S. Dewata

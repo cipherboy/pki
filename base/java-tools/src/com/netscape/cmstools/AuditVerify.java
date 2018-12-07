@@ -38,7 +38,7 @@ import org.mozilla.jss.pkcs11.PK11ECPublicKey;
 
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * Tool for verifying signed audit logs

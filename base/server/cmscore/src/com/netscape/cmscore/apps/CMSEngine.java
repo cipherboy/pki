@@ -130,12 +130,12 @@ import com.netscape.cmsutil.util.Utils;
 import netscape.ldap.LDAPConnection;
 import netscape.ldap.LDAPException;
 import netscape.ldap.LDAPSSLSocketFactoryExt;
-import netscape.security.pkcs.ContentInfo;
-import netscape.security.pkcs.PKCS7;
-import netscape.security.pkcs.SignerInfo;
-import netscape.security.x509.AlgorithmId;
-import netscape.security.x509.CertificateChain;
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.pkcs.ContentInfo;
+import org.mozilla.jss.netscape.security.pkcs.PKCS7;
+import org.mozilla.jss.netscape.security.pkcs.SignerInfo;
+import org.mozilla.jss.netscape.security.x509.AlgorithmId;
+import org.mozilla.jss.netscape.security.x509.CertificateChain;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 public class CMSEngine implements ICMSEngine {
 
@@ -487,7 +487,7 @@ public class CMSEngine implements ICMSEngine {
             mTimeSource = new SimpleTimeSource();
         }
 
-        Security.addProvider(new netscape.security.provider.CMS());
+        Security.addProvider(new org.mozilla.jss.netscape.security.provider.CMS());
 
         loadSubsystems();
         initSubsystems();

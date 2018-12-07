@@ -47,7 +47,7 @@ import com.netscape.cms.servlet.common.ICMSTemplateFiller;
 import com.netscape.cmsutil.util.Utils;
 import com.netscape.cmsutil.xml.XMLObject;
 
-import netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
 
 /**
  * This servlet creates a TPS user in the CA,

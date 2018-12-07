@@ -60,7 +60,7 @@ import com.netscape.certsrv.logging.ILogger;
 import com.netscape.cms.servlet.base.SubsystemService;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X500Name;
+import org.mozilla.jss.netscape.security.x509.X500Name;
 
 /**
  * @author ftweedal

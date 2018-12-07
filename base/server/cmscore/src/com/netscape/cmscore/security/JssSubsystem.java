@@ -97,13 +97,13 @@ import com.netscape.cmsutil.util.Cert;
 import com.netscape.cmsutil.util.Utils;
 
 import netscape.ldap.util.DN;
-import netscape.security.x509.AlgIdDSA;
-import netscape.security.x509.AlgorithmId;
-import netscape.security.x509.BasicConstraintsExtension;
-import netscape.security.x509.CertificateExtensions;
-import netscape.security.x509.X500Name;
-import netscape.security.x509.X509CertImpl;
-import netscape.security.x509.X509CertInfo;
+import org.mozilla.jss.netscape.security.x509.AlgIdDSA;
+import org.mozilla.jss.netscape.security.x509.AlgorithmId;
+import org.mozilla.jss.netscape.security.x509.BasicConstraintsExtension;
+import org.mozilla.jss.netscape.security.x509.CertificateExtensions;
+import org.mozilla.jss.netscape.security.x509.X500Name;
+import org.mozilla.jss.netscape.security.x509.X509CertImpl;
+import org.mozilla.jss.netscape.security.x509.X509CertInfo;
 
 /**
  * Subsystem for initializing JSS>
@@ -875,7 +875,7 @@ public final class JssSubsystem implements ICryptoSubsystem {
     public String getCertRequest(String subjectName, KeyPair kp)
             throws EBaseException {
         try {
-            netscape.security.pkcs.PKCS10 pkcs = KeyCertUtil.getCertRequest(subjectName, kp);
+            org.mozilla.jss.netscape.security.pkcs.PKCS10 pkcs = KeyCertUtil.getCertRequest(subjectName, kp);
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
             PrintStream ps = new PrintStream(bs);
             pkcs.print(ps);

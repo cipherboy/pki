@@ -273,7 +273,7 @@ public class FileBasedPublisher implements ILdapPublisher, IExtendedPluginInfo {
             format.setTimeZone(tz);
         String timeStamp = format.format(crl.getThisUpdate()).toString();
         namePrefix[0] += "-" + timeStamp;
-        if (((netscape.security.x509.X509CRLImpl) crl).isDeltaCRL()) {
+        if (((org.mozilla.jss.netscape.security.x509.X509CRLImpl) crl).isDeltaCRL()) {
             namePrefix[0] += "-delta";
             namePrefix[1] += "-delta";
         }

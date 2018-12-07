@@ -63,7 +63,7 @@ import com.netscape.certsrv.system.SystemConfigClient;
 import com.netscape.cmsutil.crypto.CryptoUtil;
 import com.netscape.cmsutil.util.Utils;
 
-import netscape.security.x509.X500Name;
+import org.mozilla.jss.netscape.security.x509.X500Name;
 
 /**
  * @author alee
