@@ -49,8 +49,8 @@ import com.netscape.cmscore.dbs.BigIntegerMapper;
 import com.netscape.cmscore.dbs.DateMapper;
 import com.netscape.cmscore.dbs.StringMapper;
 import com.netscape.cmscore.util.Debug;
-import netscape.security.x509.CertificateSubjectName;
-import netscape.security.x509.X509CertInfo;
+import org.mozilla.jss.netscape.security.x509.CertificateSubjectName;
+import org.mozilla.jss.netscape.security.x509.X509CertInfo;
 
 import netscape.ldap.LDAPAttribute;
 import netscape.ldap.LDAPAttributeSet;

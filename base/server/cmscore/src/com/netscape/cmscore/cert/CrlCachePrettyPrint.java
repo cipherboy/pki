@@ -24,9 +24,9 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TimeZone;
 
-import netscape.security.x509.CRLExtensions;
-import netscape.security.x509.Extension;
-import netscape.security.x509.RevokedCertificate;
+import org.mozilla.jss.netscape.security.x509.CRLExtensions;
+import org.mozilla.jss.netscape.security.x509.Extension;
+import org.mozilla.jss.netscape.security.x509.RevokedCertificate;
 
 import com.netscape.certsrv.apps.CMS;
 import com.netscape.certsrv.base.ICRLPrettyPrint;
