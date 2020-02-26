@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -23,7 +25,6 @@ import org.mozilla.jss.asn1.OCTET_STRING;
 import org.mozilla.jss.crypto.AlreadyInitializedException;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.SymmetricKey;
@@ -155,7 +156,7 @@ public class GeneratePKIArchiveOptions {
 
         // used for crypto operations
         byte iv[] = { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1 };
-        IVParameterSpec ivps = new IVParameterSpec(iv);
+        IvParameterSpec ivps = new IvParameterSpec(iv);
         CryptoManager manager = null;
         CryptoToken token = null;
 

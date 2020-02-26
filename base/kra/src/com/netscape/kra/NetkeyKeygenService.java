@@ -27,10 +27,11 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.SecureRandom;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.asn1.ASN1Util;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -170,7 +171,7 @@ public class NetkeyKeygenService implements IService {
             throw new EBaseException(e);
         }
 
-        IVParameterSpec algParam = new IVParameterSpec(iv);
+        IvParameterSpec algParam = new IvParameterSpec(iv);
 
         EngineConfig configStore = engine.getConfig();
         boolean allowEncDecrypt_archival = configStore.getBoolean("kra.allowEncDecrypt.archival", false);

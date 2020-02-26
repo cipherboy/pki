@@ -36,6 +36,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.crypto.Mac;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.dogtagpki.server.authentication.IAuthManager;
 import org.dogtagpki.server.authentication.IAuthSubsystem;
@@ -54,7 +55,6 @@ import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.DigestAlgorithm;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
 import org.mozilla.jss.crypto.HMACAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -543,7 +543,7 @@ public abstract class EnrollProfile extends Profile {
                 token = CryptoUtil.getCryptoToken(tokenName);
 
                 byte[] iv = CryptoUtil.getNonceData(EncryptionAlgorithm.AES_128_CBC.getIVLength());
-                IVParameterSpec ivps = new IVParameterSpec(iv);
+                IvParameterSpec ivps = new IvParameterSpec(iv);
 
                 PublicKey userPubKey = X509Key.parsePublicKey(new DerValue(req_key_data));
                 if (userPubKey == null) {
@@ -1355,7 +1355,7 @@ public abstract class EnrollProfile extends Profile {
             }
 
             byte[] iv = req.getExtDataInByteArray("pop_encryptedDataIV");
-            IVParameterSpec ivps = new IVParameterSpec(iv);
+            IvParameterSpec ivps = new IvParameterSpec(iv);
 
             byte[] challenge_b = CryptoUtil.decryptUsingSymmetricKey(
                     token,

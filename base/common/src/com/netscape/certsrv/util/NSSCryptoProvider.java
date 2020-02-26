@@ -4,12 +4,13 @@ import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.NotInitializedException;
 import org.mozilla.jss.crypto.AlreadyInitializedException;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -138,7 +139,7 @@ public class NSSCryptoProvider extends CryptoProvider {
         return CryptoUtil.encryptSecret(
                 token,
                 secret,
-                new IVParameterSpec(iv),
+                new IvParameterSpec(iv),
                 key,
                 encryptionAlgorithm);
     }
@@ -156,9 +157,9 @@ public class NSSCryptoProvider extends CryptoProvider {
         if (token == null) {
             throw new NotInitializedException();
         }
-        IVParameterSpec ivps = null;
+        IvParameterSpec ivps = null;
         if (nonceData != null) {
-            ivps = new IVParameterSpec(nonceData);
+            ivps = new IvParameterSpec(nonceData);
         }
         return CryptoUtil.decryptUsingSymmetricKey(token, ivps, wrappedRecoveredKey,
                 recoveryKey, encryptionAlgorithm);
@@ -171,9 +172,9 @@ public class NSSCryptoProvider extends CryptoProvider {
         if (token == null) {
             throw new NotInitializedException();
         }
-        IVParameterSpec ivps = null;
+        IvParameterSpec ivps = null;
         if (nonceData != null) {
-            ivps = new IVParameterSpec(nonceData);
+            ivps = new IvParameterSpec(nonceData);
         }
         SymmetricKey key = CryptoUtil.unwrap(
                 token, SymmetricKey.Type.fromName(algorithm),
@@ -189,9 +190,9 @@ public class NSSCryptoProvider extends CryptoProvider {
         if (token == null) {
             throw new NotInitializedException();
         }
-        IVParameterSpec ivps = null;
+        IvParameterSpec ivps = null;
         if (nonceData != null) {
-            ivps = new IVParameterSpec(nonceData);
+            ivps = new IvParameterSpec(nonceData);
         }
         PrivateKey key = CryptoUtil.unwrap(token, pubKey, true, recoveryKey, wrappedRecoveredKey, wrapAlgorithm, ivps);
         return key.getEncoded();
@@ -273,9 +274,9 @@ public class NSSCryptoProvider extends CryptoProvider {
     @Override
     public byte[] wrapWithSessionKey(SymmetricKey secret, SymmetricKey sessionKey, byte[] iv, KeyWrapAlgorithm wrapAlg)
             throws Exception {
-        IVParameterSpec ivps = null;
+        IvParameterSpec ivps = null;
         if (iv != null) {
-            ivps = new IVParameterSpec(iv);
+            ivps = new IvParameterSpec(iv);
         }
         return CryptoUtil.wrapUsingSymmetricKey(
                 token,

@@ -19,10 +19,11 @@ package com.netscape.kra;
 
 import java.security.PublicKey;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.NotInitializedException;
 import org.mozilla.jss.crypto.CryptoToken;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
 import org.mozilla.jss.crypto.PrivateKey;
 import org.mozilla.jss.crypto.Signature;
@@ -285,7 +286,7 @@ public class TransportKeyUnit extends EncryptionUnit implements
         WrappingParams params = WrappingParams.getWrappingParamsFromArchiveOptions(
                 wrapOID,
                 priKeyAlgo,
-                new IVParameterSpec(wrapIV));
+                new IvParameterSpec(wrapIV));
 
         SymmetricKey sk = CryptoUtil.unwrap(
                 token,
@@ -321,7 +322,7 @@ public class TransportKeyUnit extends EncryptionUnit implements
                 symmAlgOID,
                 null,
                 priKeyAlgo,
-                new IVParameterSpec(symmAlgParams),
+                new IvParameterSpec(symmAlgParams),
                 null);
 
         // (1) unwrap the session key
@@ -354,7 +355,7 @@ public class TransportKeyUnit extends EncryptionUnit implements
         WrappingParams params = WrappingParams.getWrappingParamsFromArchiveOptions(
                 wrapOID,
                 priKeyAlgo,
-                new IVParameterSpec(wrapIV));
+                new IvParameterSpec(wrapIV));
 
         // (1) unwrap the session key
         SymmetricKey sk = CryptoUtil.unwrap(

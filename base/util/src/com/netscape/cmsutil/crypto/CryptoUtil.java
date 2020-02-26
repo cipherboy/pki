@@ -58,6 +58,7 @@ import java.util.Vector;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
@@ -87,7 +88,6 @@ import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.DigestAlgorithm;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
 import org.mozilla.jss.crypto.HMACAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.IllegalBlockSizeException;
 import org.mozilla.jss.crypto.InternalCertificate;
 import org.mozilla.jss.crypto.InvalidKeyFormatException;
@@ -2264,7 +2264,7 @@ public class CryptoUtil {
     public static byte[] encryptSecret(
             CryptoToken token,
             byte[] secret,
-            IVParameterSpec iv,
+            IvParameterSpec iv,
             SymmetricKey key,
             EncryptionAlgorithm algorithm)
             throws NoSuchAlgorithmException, TokenException, InvalidKeyException,
@@ -2443,7 +2443,7 @@ public class CryptoUtil {
         ASN1Value v = algId.getParameters();
         v = ((ANY) v).decodeWith(new OCTET_STRING.Template());
         byte iv[] = ((OCTET_STRING) v).toByteArray();
-        IVParameterSpec ivps = new IVParameterSpec(iv);
+        IvParameterSpec ivps = new IvParameterSpec(iv);
 
         // des-ede3-cbc
         if (oid.equals(new OBJECT_IDENTIFIER("1.2.840.113549.3.7"))) {
@@ -2647,7 +2647,7 @@ public class CryptoUtil {
     //generic crypto operations
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static byte[] decryptUsingSymmetricKey(CryptoToken token, IVParameterSpec ivspec, byte[] encryptedData,
+    public static byte[] decryptUsingSymmetricKey(CryptoToken token, IvParameterSpec ivspec, byte[] encryptedData,
             SymmetricKey wrappingKey, EncryptionAlgorithm encryptionAlgorithm) throws Exception {
         Cipher decryptor = token.getCipherContext(encryptionAlgorithm);
         decryptor.initDecrypt(wrappingKey, ivspec);
@@ -2655,7 +2655,7 @@ public class CryptoUtil {
     }
 
     public static byte[] encryptUsingSymmetricKey(CryptoToken token, SymmetricKey wrappingKey, byte[] data,
-            EncryptionAlgorithm alg, IVParameterSpec ivspec)
+            EncryptionAlgorithm alg, IvParameterSpec ivspec)
             throws Exception {
         Cipher cipher = token.getCipherContext(alg);
         cipher.initEncrypt(wrappingKey, ivspec);
@@ -2663,14 +2663,14 @@ public class CryptoUtil {
     }
 
     public static byte[] wrapUsingSymmetricKey(CryptoToken token, SymmetricKey wrappingKey, SymmetricKey data,
-            IVParameterSpec ivspec, KeyWrapAlgorithm alg) throws Exception {
+            IvParameterSpec ivspec, KeyWrapAlgorithm alg) throws Exception {
         KeyWrapper wrapper = token.getKeyWrapper(alg);
         wrapper.initWrap(wrappingKey, ivspec);
         return wrapper.wrap(data);
     }
 
     public static byte[] wrapUsingSymmetricKey(CryptoToken token, SymmetricKey wrappingKey, PrivateKey data,
-            IVParameterSpec ivspec, KeyWrapAlgorithm alg) throws Exception {
+            IvParameterSpec ivspec, KeyWrapAlgorithm alg) throws Exception {
         KeyWrapper wrapper = token.getKeyWrapper(alg);
         wrapper.initWrap(wrappingKey, ivspec);
         return wrapper.wrap(data);
@@ -2685,7 +2685,7 @@ public class CryptoUtil {
 
     public static SymmetricKey unwrap(CryptoToken token, SymmetricKey.Type keyType,
             int strength, SymmetricKey.Usage usage, SymmetricKey wrappingKey, byte[] wrappedData,
-            KeyWrapAlgorithm wrapAlgorithm, IVParameterSpec wrappingIV) throws Exception {
+            KeyWrapAlgorithm wrapAlgorithm, IvParameterSpec wrappingIV) throws Exception {
         KeyWrapper wrapper = token.getKeyWrapper(wrapAlgorithm);
         wrapper.initUnwrap(wrappingKey, wrappingIV);
         return wrapper.unwrapSymmetric(wrappedData, keyType, usage, strength/8);
@@ -2701,7 +2701,7 @@ public class CryptoUtil {
     }
 
     public static PrivateKey unwrap(CryptoToken token, PublicKey pubKey, boolean temporary,
-            SymmetricKey wrappingKey, byte[] wrappedData, KeyWrapAlgorithm wrapAlgorithm, IVParameterSpec wrapIV)
+            SymmetricKey wrappingKey, byte[] wrappedData, KeyWrapAlgorithm wrapAlgorithm, IvParameterSpec wrapIV)
             throws Exception {
         KeyWrapper wrapper = token.getKeyWrapper(wrapAlgorithm);
         wrapper.initUnwrap(wrappingKey, wrapIV);

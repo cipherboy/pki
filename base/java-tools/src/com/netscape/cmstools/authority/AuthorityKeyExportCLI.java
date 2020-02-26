@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.PublicKey;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.dogtagpki.cli.CommandCLI;
@@ -12,7 +14,6 @@ import org.mozilla.jss.asn1.OBJECT_IDENTIFIER;
 import org.mozilla.jss.asn1.OCTET_STRING;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -107,7 +108,7 @@ public class AuthorityKeyExportCLI extends CommandCLI {
         if (algOid.equals(DES_EDE3_CBC_OID)) {
             EncryptionAlgorithm encAlg = EncryptionAlgorithm.DES3_CBC_PAD;
             byte iv[] = CryptoUtil.getNonceData(encAlg.getIVLength());
-            IVParameterSpec ivps = new IVParameterSpec(iv);
+            IvParameterSpec ivps = new IvParameterSpec(iv);
 
             params = new WrappingParams(
                 SymmetricKey.DES3, KeyGenAlgorithm.DES3, 168,
@@ -120,7 +121,7 @@ public class AuthorityKeyExportCLI extends CommandCLI {
         else if (algOid.equals(AES_128_CBC_OID)) {
             EncryptionAlgorithm encAlg = EncryptionAlgorithm.AES_CBC_PAD;
             byte iv[] = CryptoUtil.getNonceData(encAlg.getIVLength());
-            IVParameterSpec ivps = new IVParameterSpec(iv);
+            IvParameterSpec ivps = new IvParameterSpec(iv);
 
             params = new WrappingParams(
                 SymmetricKey.AES, KeyGenAlgorithm.AES, 128,

@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.crypto.BadPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.mozilla.jss.crypto.Cipher;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
 import org.mozilla.jss.crypto.HMACAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.IllegalBlockSizeException;
 import org.mozilla.jss.crypto.JSSMessageDigest;
 import org.mozilla.jss.crypto.SymmetricKey;
@@ -417,7 +417,7 @@ public class NistSP800_108KDF extends KDF {
 
         try {
             encryptor = token.getCipherContext(EncryptionAlgorithm.AES_128_CBC);
-            encryptor.initEncrypt(aesKey, new IVParameterSpec(iv));
+            encryptor.initEncrypt(aesKey, new IvParameterSpec(iv));
             k0 = encryptor.doFinal(k0);
 
         } catch (NoSuchAlgorithmException | TokenException | IllegalStateException | IllegalBlockSizeException
@@ -496,7 +496,7 @@ public class NistSP800_108KDF extends KDF {
         byte[] currentBlock = new byte[AES_CMAC_BLOCK_SIZE];
         for (int i = 0; i < numBlocks; i++) {
             try {
-                encryptor.initEncrypt(aesKey, new IVParameterSpec(encData));
+                encryptor.initEncrypt(aesKey, new IvParameterSpec(encData));
                 System.arraycopy(finalData, i * AES_CMAC_BLOCK_SIZE, currentBlock, 0, AES_CMAC_BLOCK_SIZE);
                 encData = encryptor.doFinal(currentBlock);
             } catch (TokenException | IllegalStateException | IllegalBlockSizeException

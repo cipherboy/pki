@@ -21,12 +21,13 @@ import java.math.BigInteger;
 // ldap java sdk
 import java.util.Enumeration;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.dogtagpki.server.authentication.AuthManagerConfig;
 import org.dogtagpki.server.authentication.AuthToken;
 import org.dogtagpki.server.ca.ICertificateAuthority;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
 import org.mozilla.jss.crypto.SymmetricKey;
@@ -375,7 +376,7 @@ public class SharedSecret extends DirBasedAuthentication
 
             SymmetricKey ver_session = CryptoUtil.unwrap(token, SymmetricKey.AES, 128, SymmetricKey.Usage.UNWRAP,
                     issuanceProtPrivKey, wrapped_session, wrapAlgorithm);
-            ver_passphrase = CryptoUtil.decryptUsingSymmetricKey(token, new IVParameterSpec(iv),
+            ver_passphrase = CryptoUtil.decryptUsingSymmetricKey(token, new IvParameterSpec(iv),
                     wrapped_passphrase,
                     ver_session, encryptAlgorithm);
 

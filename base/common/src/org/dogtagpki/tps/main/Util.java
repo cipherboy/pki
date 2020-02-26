@@ -28,11 +28,12 @@ import java.net.URLEncoder;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Calendar;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.crypto.Cipher;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.netscape.security.util.Utils;
 import org.mozilla.jss.netscape.security.x509.AuthorityKeyIdentifierExtension;
 import org.mozilla.jss.netscape.security.x509.KeyIdentifier;
@@ -274,7 +275,7 @@ public class Util {
             Cipher cipher3des = token.getCipherContext(EncryptionAlgorithm.DES3_CBC);
             mac = new TPSBuffer(initialIcv);
 
-            AlgorithmParameterSpec algSpec = new IVParameterSpec(initialIcv.toBytesArray());
+            AlgorithmParameterSpec algSpec = new IvParameterSpec(initialIcv.toBytesArray());
 
             int inputOffset = 0;
 
@@ -292,7 +293,7 @@ public class Util {
                 }
 
                 mac.set(ciphResult);
-                algSpec = new IVParameterSpec(ciphResult);
+                algSpec = new IvParameterSpec(ciphResult);
 
                 // logger.debug("Util.computeMACdes3des: des encrypted bloc: " + mac.toHexString());
 
@@ -310,7 +311,7 @@ public class Util {
 
             logger.debug("About to encrypt 3des: " + mac.toHexString() + " icv: " + newICV.toHexString());
 
-            cipher3des.initEncrypt(symKey, new IVParameterSpec(newICV.toBytesArray()));
+            cipher3des.initEncrypt(symKey, new IvParameterSpec(newICV.toBytesArray()));
             byte[] ciphResultFinal = cipher3des.doFinal(mac.toBytesArray());
 
             if (ciphResultFinal.length != mac.size()) {
@@ -446,7 +447,7 @@ public class Util {
                 ivEnc = iv.toBytesArray();
              }
 
-            algSpec = new IVParameterSpec(ivEnc);
+            algSpec = new IvParameterSpec(ivEnc);
             cipher.initEncrypt(encKey, algSpec);
             byte[] encryptedBytes = cipher.doFinal(dataToEnc.toBytesArray());
             encrypted = new TPSBuffer(encryptedBytes);
@@ -480,7 +481,7 @@ public class Util {
 
             byte[] iv = new byte[len]; // Assume iv set to 0's as in current TPS
 
-            algSpec = new IVParameterSpec(iv);
+            algSpec = new IvParameterSpec(iv);
 
             cipher.initEncrypt(encKey, algSpec);
 

@@ -30,6 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.crypto.spec.IvParameterSpec;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +53,6 @@ import org.mozilla.jss.asn1.SEQUENCE;
 import org.mozilla.jss.crypto.Cipher;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyGenerator;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
@@ -1134,7 +1134,7 @@ public class CRSEnrollment extends HttpServlet {
 
             cip = skinternal.getOwningToken().getCipherContext(ea);
 
-            cip.initDecrypt(skinternal, (new IVParameterSpec(req.getIV())));
+            cip.initDecrypt(skinternal, (new IvParameterSpec(req.getIV())));
 
             decryptedP10bytes = cip.doFinal(req.getEncryptedPkcs10());
             logger.debug("decryptedP10bytes:");
@@ -1819,8 +1819,8 @@ public class CRSEnrollment extends HttpServlet {
                 // This should be changed to generate proper DES IV.
 
                 Cipher cipher = cx.getInternalToken().getCipherContext(ea);
-                IVParameterSpec desIV =
-                        new IVParameterSpec(new byte[] {
+                IvParameterSpec desIV =
+                        new IvParameterSpec(new byte[] {
                                 (byte) 0xff, (byte) 0x00,
                                 (byte) 0xff, (byte) 0x00,
                                 (byte) 0xff, (byte) 0x00,

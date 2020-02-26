@@ -9,13 +9,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Map;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.NoSuchTokenException;
 import org.mozilla.jss.NotInitializedException;
 import org.mozilla.jss.crypto.Cipher;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyGenerator;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
@@ -847,11 +848,11 @@ public class SecureChannelProtocol {
                 iv = new byte[ivLength]; // all zeroes
             }
 
-            encryptor.initEncrypt(tempKey, new IVParameterSpec(iv));
+            encryptor.initEncrypt(tempKey, new IvParameterSpec(iv));
             byte[] wrappedKey = encryptor.doFinal(finalInputKeyArray);
 
             KeyWrapper keyWrap = token.getKeyWrapper(KeyWrapAlgorithm.AES_CBC);
-            keyWrap.initUnwrap(tempKey, new IVParameterSpec(iv));
+            keyWrap.initUnwrap(tempKey, new IvParameterSpec(iv));
 
             if(isPerm)
                 finalAESKey = keyWrap.unwrapSymmetricPerm(wrappedKey, SymmetricKey.AES, AES_128_BYTES);
@@ -927,13 +928,13 @@ public class SecureChannelProtocol {
             }
 
             KeyWrapper keyWrap = token.getKeyWrapper(KeyWrapAlgorithm.AES_CBC);
-            keyWrap.initWrap(tempKey, new IVParameterSpec(iv));
+            keyWrap.initWrap(tempKey, new IvParameterSpec(iv));
             byte[] wrappedKey = keyWrap.wrap(finalKeyToWrap);
 
             //Now unwrap to an AES key
 
             KeyWrapper keyUnWrap = token.getKeyWrapper(KeyWrapAlgorithm.AES_CBC);
-            keyUnWrap.initUnwrap(tempKey, new IVParameterSpec(iv));
+            keyUnWrap.initUnwrap(tempKey, new IvParameterSpec(iv));
             finalAESKey = keyUnWrap.unwrapSymmetric(wrappedKey, SymmetricKey.AES, 16);
 
             jssSubsystem.obscureBytes(wrappedKey);
@@ -1082,7 +1083,7 @@ public class SecureChannelProtocol {
 
             if(unwrappingKey.getType() == SymmetricKey.Type.AES)
             {
-                IVParameterSpec iv = new IVParameterSpec(new byte[EncryptionAlgorithm.AES_128_CBC.getIVLength()]);
+                IvParameterSpec iv = new IvParameterSpec(new byte[EncryptionAlgorithm.AES_128_CBC.getIVLength()]);
                 keyWrap = token.getKeyWrapper(KeyWrapAlgorithm.AES_CBC);
                 keyWrap.initUnwrap(unwrappingKey, iv);
             }
@@ -1471,7 +1472,7 @@ public class SecureChannelProtocol {
                 }
 
                 keyWrap = token.getKeyWrapper(KeyWrapAlgorithm.AES_CBC);
-                keyWrap.initWrap(wrapper, new IVParameterSpec(iv));
+                keyWrap.initWrap(wrapper, new IvParameterSpec(iv));
                 wrappedSessKeyData = keyWrap.wrap(sessionKey);
 
 
@@ -1512,7 +1513,7 @@ public class SecureChannelProtocol {
             CryptoManager cm = this.getCryptoManger();
             CryptoToken token = returnTokenByName(selectedToken, cm);
             Cipher encryptor = token.getCipherContext(EncryptionAlgorithm.AES_128_CBC);
-            encryptor.initEncrypt(symKey, new IVParameterSpec(finalIv));
+            encryptor.initEncrypt(symKey, new IvParameterSpec(finalIv));
             output = encryptor.doFinal(input);
 
             //SecureChannelProtocol.debugByteArray(output, "Encrypted data:");

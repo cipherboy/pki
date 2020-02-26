@@ -40,6 +40,7 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 import javax.crypto.Mac;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.asn1.ANY;
@@ -58,7 +59,6 @@ import org.mozilla.jss.asn1.UTF8String;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.DigestAlgorithm;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -1827,7 +1827,7 @@ public class CMCRequest {
             ASN1Value v = thePOPAlgID.getParameters();
             v = ((ANY) v).decodeWith(new OCTET_STRING.Template());
             byte iv[] = ((OCTET_STRING) v).toByteArray();
-            IVParameterSpec ivps = new IVParameterSpec(iv);
+            IvParameterSpec ivps = new IvParameterSpec(iv);
 
             AlgorithmIdentifier witnessAlgID = encryptedPop.getWitnessAlgID();
             OCTET_STRING witness = encryptedPop.getWitness();

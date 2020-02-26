@@ -790,7 +790,7 @@ public class ComCrypto {
             KeyWrapper wrapper1 = token.getKeyWrapper(
                     KeyWrapAlgorithm.DES3_CBC_PAD);
 
-            wrapper1.initWrap(sk, new IVParameterSpec(iv));
+            wrapper1.initWrap(sk, new IvParameterSpec(iv));
 
             byte key_data[] = wrapper1.wrap((
                     org.mozilla.jss.crypto.PrivateKey) pair.getPrivate());

@@ -27,9 +27,10 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.util.Hashtable;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -346,7 +347,7 @@ public class TokenKeyRecoveryService implements IService {
             */
             CryptoToken token = mStorageUnit.getToken();
             logger.debug("TokenKeyRecoveryService: got token slot:" + token.getName());
-            IVParameterSpec algParam = new IVParameterSpec(iv);
+            IvParameterSpec algParam = new IvParameterSpec(iv);
 
             KeyRecord keyRecord = null;
             logger.debug("KRA reading key record");

@@ -31,6 +31,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import javax.crypto.BadPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.mozilla.jss.CryptoManager;
@@ -39,7 +40,6 @@ import org.mozilla.jss.asn1.OBJECT_IDENTIFIER;
 import org.mozilla.jss.crypto.Cipher;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.IllegalBlockSizeException;
 import org.mozilla.jss.crypto.KeyGenerator;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
@@ -169,12 +169,12 @@ public class StorageKeyUnit extends EncryptionUnit implements IStorageKeyUnit {
         byte [] iv = getConfigIV(
                 config, KeyRecordParser.OUT_PL_ENCRYPTION_IV,
                 KeyRecordParser.OUT_PL_ENCRYPTION_IV_LEN);
-        if (iv != null) params.setPayloadEncryptionIV(new IVParameterSpec(iv));
+        if (iv != null) params.setPayloadEncryptionIV(new IvParameterSpec(iv));
 
         iv = getConfigIV(
                 config, KeyRecordParser.OUT_PL_WRAP_IV,
                 KeyRecordParser.OUT_PL_WRAP_IV_LEN);
-        if (iv != null) params.setPayloadWrappingIV(new IVParameterSpec(iv));
+        if (iv != null) params.setPayloadWrappingIV(new IvParameterSpec(iv));
 
         if (encrypt) {
             // Some HSMs have not yet implemented AES-KW.  Use AES-CBC-PAD instead
@@ -182,7 +182,7 @@ public class StorageKeyUnit extends EncryptionUnit implements IStorageKeyUnit {
                 params.getPayloadWrapAlgorithm().equals(KeyWrapAlgorithm.AES_KEY_WRAP_PAD)) {
                 params.setPayloadWrapAlgorithm(KeyWrapAlgorithm.AES_CBC_PAD);
                 iv = CryptoUtil.getNonceData(16);
-                params.setPayloadWrappingIV(new IVParameterSpec(iv));
+                params.setPayloadWrappingIV(new IvParameterSpec(iv));
             }
         }
 

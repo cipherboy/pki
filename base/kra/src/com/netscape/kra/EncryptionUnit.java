@@ -19,9 +19,10 @@ package com.netscape.kra;
 
 import java.security.PublicKey;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -48,8 +49,8 @@ public abstract class EncryptionUnit implements IEncryptionUnit {
     */
     public static final byte[] iv = { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1 };
     public static final byte[] iv2 = { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1 };
-    public static final IVParameterSpec IV = new IVParameterSpec(iv);
-    public static final IVParameterSpec IV2 = new IVParameterSpec(iv2);
+    public static final IvParameterSpec IV = new IvParameterSpec(iv);
+    public static final IvParameterSpec IV2 = new IvParameterSpec(iv2);
 
     public EncryptionUnit() {
         logger.debug("EncryptionUnit.EncryptionUnit this: " + this);

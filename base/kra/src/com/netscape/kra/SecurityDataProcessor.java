@@ -9,6 +9,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
 import java.util.Hashtable;
 
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.RC2ParameterSpec;
 
 import org.dogtagpki.server.kra.rest.KeyRequestService;
@@ -16,7 +17,6 @@ import org.mozilla.jss.asn1.OBJECT_IDENTIFIER;
 import org.mozilla.jss.asn1.OCTET_STRING;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenerator;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PBEAlgorithm;
@@ -502,16 +502,16 @@ public class SecurityDataProcessor {
         if (payloadEncryptOID == null) {
             // talking to an old server, use 3DES
             wrapParams = transportUnit.getOldWrappingParams();
-            wrapParams.setPayloadEncryptionIV(new IVParameterSpec(iv));
-            wrapParams.setPayloadWrappingIV(new IVParameterSpec(iv_wrap));
+            wrapParams.setPayloadEncryptionIV(new IvParameterSpec(iv));
+            wrapParams.setPayloadWrappingIV(new IvParameterSpec(iv_wrap));
         } else {
             try {
                 wrapParams = new WrappingParams(
                     payloadEncryptOID,
                     payloadWrapName,
                     transportKeyAlgo,
-                    iv != null? new IVParameterSpec(iv): null,
-                    iv_wrap != null? new IVParameterSpec(iv_wrap): null);
+                    iv != null? new IvParameterSpec(iv): null,
+                    iv_wrap != null? new IvParameterSpec(iv_wrap): null);
             } catch (Exception e) {
                 jssSubsystem.obscureBytes(unwrappedSecData);
                 throw new EBaseException("Cannot generate wrapping params: " + e, e);
@@ -821,8 +821,8 @@ public class SecurityDataProcessor {
 
         EncryptionAlgorithm encAlg = pbeAlg.getEncryptionAlg();
         AlgorithmParameterSpec params = null;
-        if (encAlg.getParameterClass().equals(IVParameterSpec.class)) {
-            params = new IVParameterSpec(kg.generatePBE_IV());
+        if (encAlg.getParameterClass().equals(IvParameterSpec.class)) {
+            params = new IvParameterSpec(kg.generatePBE_IV());
         } else if (encAlg.getParameterClass().equals(
                 RC2ParameterSpec.class)) {
             params = new RC2ParameterSpec(key.getStrength(),
@@ -831,10 +831,10 @@ public class SecurityDataProcessor {
 
         byte[] encrypted = null;
         if (symKey != null) {
-            encrypted = CryptoUtil.wrapUsingSymmetricKey(token, key, symKey, (IVParameterSpec) params,
+            encrypted = CryptoUtil.wrapUsingSymmetricKey(token, key, symKey, (IvParameterSpec) params,
                     KeyWrapAlgorithm.DES3_CBC_PAD);
         } else if (privateKey != null) {
-            encrypted = CryptoUtil.wrapUsingSymmetricKey(token, key, privateKey, (IVParameterSpec) params,
+            encrypted = CryptoUtil.wrapUsingSymmetricKey(token, key, privateKey, (IvParameterSpec) params,
                     KeyWrapAlgorithm.DES3_CBC_PAD);
         }
         if (encrypted == null) {

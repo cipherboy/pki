@@ -23,10 +23,11 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.apache.commons.codec.binary.Base64;
 import org.mozilla.jss.asn1.OBJECT_IDENTIFIER;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.netscape.security.util.WrappingParams;
 
 import com.netscape.certsrv.base.EBaseException;
@@ -492,13 +493,13 @@ public class KeyRecord implements IDBObj, IKeyRecord {
         data = mMetaInfo.get(KeyRecordParser.OUT_PL_ENCRYPTION_IV);
         if (data != null) {
             byte[] iv = Base64.decodeBase64(data.toString());
-            params.setPayloadEncryptionIV(new IVParameterSpec(iv));
+            params.setPayloadEncryptionIV(new IvParameterSpec(iv));
         }
 
         data = mMetaInfo.get(KeyRecordParser.OUT_PL_WRAP_IV);
         if (data != null) {
             byte[] iv = Base64.decodeBase64(data.toString());
-            params.setPayloadWrappingIV(new IVParameterSpec(iv));
+            params.setPayloadWrappingIV(new IvParameterSpec(iv));
         }
 
         return params;

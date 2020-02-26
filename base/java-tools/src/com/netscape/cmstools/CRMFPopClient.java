@@ -32,6 +32,7 @@ import java.security.MessageDigest;
 import java.security.PublicKey;
 
 import javax.crypto.Mac;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -61,7 +62,6 @@ import org.mozilla.jss.asn1.UTF8String;
 import org.mozilla.jss.asn1.UniversalString;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.PrivateKey;
@@ -719,7 +719,7 @@ public class CRMFPopClient {
     }
 
     private WrappingParams getWrappingParams(KeyWrapAlgorithm kwAlg, byte[] iv) throws Exception {
-        IVParameterSpec ivps = iv != null ? new IVParameterSpec(iv): null;
+        IvParameterSpec ivps = iv != null ? new IvParameterSpec(iv): null;
 
         if (kwAlg == KeyWrapAlgorithm.AES_KEY_WRAP_PAD ||
             kwAlg == KeyWrapAlgorithm.AES_CBC_PAD) {

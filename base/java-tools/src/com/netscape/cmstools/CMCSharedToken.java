@@ -23,6 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Option;
@@ -31,7 +33,6 @@ import org.apache.commons.cli.PosixParser;
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.EncryptionAlgorithm;
-import org.mozilla.jss.crypto.IVParameterSpec;
 import org.mozilla.jss.crypto.KeyGenAlgorithm;
 import org.mozilla.jss.crypto.KeyWrapAlgorithm;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
@@ -251,7 +252,7 @@ public class CMCSharedToken {
                     sessionKey,
                     passphrase.getBytes("UTF-8"),
                     encryptAlgorithm,
-                    new IVParameterSpec(iv));
+                    new IvParameterSpec(iv));
 
             if (verbose) System.out.println("Wrapping session key with issuance protection cert");
             byte[] issuanceProtWrappedSessionKey = CryptoUtil.wrapUsingPublicKey(
@@ -311,7 +312,7 @@ public class CMCSharedToken {
                 System.out.println("wrapped passphrase retrieved");
 
                 SymmetricKey ver_session = CryptoUtil.unwrap(token,  SymmetricKey.AES, 128, SymmetricKey.Usage.UNWRAP, wrappingKey, wrapped_session, wrapAlgorithm);
-                byte[] ver_passphrase = CryptoUtil.decryptUsingSymmetricKey(token, new IVParameterSpec(iv), wrapped_passphrase,
+                byte[] ver_passphrase = CryptoUtil.decryptUsingSymmetricKey(token, new IvParameterSpec(iv), wrapped_passphrase,
                 ver_session, encryptAlgorithm);
 
                 String ver_spassphrase = new String(ver_passphrase, "UTF-8");
