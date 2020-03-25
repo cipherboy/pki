@@ -535,6 +535,10 @@ public class SecurityDataProcessor {
                 unwrappedSess = transportUnit.unwrap_session_key(ct, wrappedSessKey,
                         SymmetricKey.Usage.DECRYPT, wrapParams);
 
+                if (wrappedPassPhrase == null) {
+                    CMS.debug("Warning: wrappedPassPhrase is null!");
+                }
+
                 unwrappedPass = CryptoUtil.decryptUsingSymmetricKey(
                         ct,
                         wrapParams.getPayloadEncryptionIV(),
